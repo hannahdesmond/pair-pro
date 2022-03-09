@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useParams } from 'react-router-dom'
 import { useEffect, useState, useContext, useRef } from "react";
-import { Container, Row, Col, Form, Button } from "react-bootstrap";
+import { Card, Row, Col, Form, Button } from "react-bootstrap";
 import { AuthContext } from "../context/AuthContext";
 import Conversation from "./Conversation";
 import Message from "./Message";
@@ -16,6 +16,7 @@ const ChatPage = () => {
   const [arrivalMessage, setArrivalMessage] = useState(null);
   const [newMessage, setNewMessage] = useState("");
   const socket = useRef(io("ws://localhost:8900"));
+  const scrollRef = useRef();
 
   useEffect(() => {
     socket.current = io("ws://localhost:8900");
@@ -99,46 +100,69 @@ const ChatPage = () => {
     }
   };
 
+  useEffect(() => {
+    scrollRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [messages])
+
+  const chatBackground = (conversation) => {
+    return conversation === currentChat ? "primary" : "warning"
+  }
+
   return (
     <>
-      <h1>Chat Page</h1>
-      <Container>
-        <Row>
-          <Col sm={4}>
-            {conversations.map((conversation) => (
-              <div onClick={() => setCurrentChat(conversation)}>
-                <Conversation
-                  conversation={conversation}
-                  currentUser={state.user}
-                />
-              </div>
-            ))}
-          </Col>
-          <Col sm={8}>
-            {messages.map((message) => (
-              <Message
-                message={message}
-                own={state.user._id === message.senderId}
+    <div className='sml-banner-image-teal'>
+      <div className="dark-grey-bg white-text">
+        <h1 className="varela">Chat</h1>
+        <h3 className="courier">Time to talk code!</h3>
+      </div>
+    </div>
+    <Row className="width-98pc">
+      <Col sm={4}>
+        {conversations.map((conversation) => (
+          <> 
+            <Card 
+              onClick={() => setCurrentChat(conversation)} bg={chatBackground(conversation)} 
+              style={{ cursor: "pointer" }}
+              className="text-right"
+            >
+              <Conversation
+                conversation={conversation}
+                currentUser={state.user}
               />
-            ))}
-            <div className="form-container">
-              <Form className="message-submit">
-                <Form.Group>
-                  <Form.Control
-                    as="textarea"
-                    rows={3}
-                    onChange={(e) => setNewMessage(e.target.value)}
-                    value={newMessage}
-                  />
-                  <Button onClick={handleSubmit} type="submit">
-                    Submit
-                  </Button>
-                </Form.Group>
-              </Form>
-            </div>
-          </Col>
-        </Row>
-      </Container>
+            </Card>
+          </>
+        ))}
+      </Col>
+      <Col sm={8}>
+        <div className="scroll height-70vh bottom-scroll">
+        {messages.map((message) => (
+          <div ref={scrollRef}>
+          <Message
+            message={message}
+            own={state.user._id === message.senderId}
+        
+          />
+          </div>
+        ))}
+        </div>
+        <div className="form-container fix-bottom">
+          <Form className="message-submit">
+            <Form.Group>
+              <Form.Control
+                as="textarea"
+                rows={3}
+                onChange={(e) => setNewMessage(e.target.value)}
+                value={newMessage}
+              />
+              <Button onClick={handleSubmit} type="submit" >
+                Submit
+              </Button>
+            </Form.Group>
+          </Form>
+
+        </div>
+      </Col>
+    </Row>
     </>
   );
 };

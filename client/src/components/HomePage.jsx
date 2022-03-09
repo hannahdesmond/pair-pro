@@ -10,7 +10,7 @@ const Home = () => {
           <br></br>
           <h3 className='dark-orange-text courier'>Hello, world!</h3>
           <h5 className='white-text'>We won't REST until you find your</h5>
-          <h5 className='white-text'>IDEal Pair Programming Partner</h5>
+          <h5 className='white-text'>IDEal Pair Programming Partners</h5>
         </div>
       </div>
       <HomeCards />

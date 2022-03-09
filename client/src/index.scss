@@ -1,5 +1,27 @@
-* {
+.text-center, h1, h2, h3, h4, h5, h6 {
   text-align: center;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.vertical-center {
+  display: flex;
+  align-items: center;
+}
+
+.top-10vh {
+  margin-top: 10vh;
+}
+
+body {
+  background-image: url(./assets/background.png);
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  height: 100vh;
 }
 
 .home-banner-image {
@@ -17,7 +39,17 @@
 }
 
 .sml-banner-image {
-  background-image: url(./assets/sml-banner.png);
+  background-image: url(./assets/sml-banner-dark-orange.png);
+  background-position-x: center;
+  background-position-y: top;
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 200px;
+  margin-bottom: 30px;
+}
+
+.sml-banner-image-teal {
+  background-image: url(./assets/sml-banner-dark-teal.png);
   background-position-x: center;
   background-position-y: top;
   background-size: cover;
@@ -28,8 +60,30 @@
 
 .card {
   width: 100%;
-  padding-left: 30px;
-  padding-right: 30px;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.height-min90vh {
+  min-height: 100vh;
+}
+
+.height-70vh {
+  height: 70vh;
+}
+
+.scroll {
+  overflow-y: scroll;
+}
+
+.width-90pc {
+  width: 90%;
+}
+
+.width-98pc {
+  width: 98%;
 }
 
 $theme-colors: (

@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { Button } from "react-bootstrap";
+import { Card } from "react-bootstrap";
 
 const Conversation = ({ conversation, currentUser }) => {
   const [user, setUser] = useState(null);
@@ -20,10 +20,11 @@ const Conversation = ({ conversation, currentUser }) => {
   }, [currentUser, conversation]);
 
   return (
-    <div className="conversation">
-      <Button className="conversationName" variant="info">{user?.name}</Button>
-      <br></br>
-    </div>
+    <>
+      <Card.Body>
+        <Card.Text>{user?.name}</Card.Text>
+      </Card.Body>
+    </>
   );
 };
 

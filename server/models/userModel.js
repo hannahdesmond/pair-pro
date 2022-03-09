@@ -22,6 +22,12 @@ const userSchema = mongoose.Schema(
     bio: {
       type: String,
       required: [true, 'Please tell everyone a little about yourself']
+    },
+    image: {
+      type: String,
+      image: Buffer,
+      required: [true, 'Please add a profile picture'],
+      default: ""
     }
   },
   {
