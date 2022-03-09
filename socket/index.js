@@ -21,6 +21,7 @@ const getUser = (userId) => {
   return users.find((user) => user.userId === userId);
 };
 
+//establish the connection
 io.on("connection", (socket) => {
   //when a user connects
   console.log("a user connected.");

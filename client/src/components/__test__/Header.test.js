@@ -4,13 +4,17 @@ import Header from '../Header'
 
 import { render, screen } from '@testing-library/react'
 import "@testing-library/jest-dom/extend-expect"
-import { MemoryRouter } from 'react-router-dom';
+import { MemoryRouter, UNSAFE_RouteContext } from 'react-router-dom';
+import { AuthContextProvider } from '../../context/AuthContext';
 
-test('header renders with correct text', () => {
+test('header renders with logout if user logged in', () => {
     render(
-   
-    <Header />, {wrapper: MemoryRouter});
-  
+    <AuthContextProvider value={}>
+      <MemoryRouter> 
+        <Header />
+      </MemoryRouter>
+    </AuthContextProvider>
+    
     const headerEl = screen.getByTestId("nav");
 
     expect(headerEl.textContent).toBe("PairPro Login Register")   
