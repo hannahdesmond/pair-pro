@@ -11,7 +11,7 @@ const app = express();
 
 //CORS is a necessary security mechanism that allows a web page from one domain or Origin to access a resource with a different domain
 app.use(cors());
-app.use(express.json({ limit: 1024 * 1024 * 4 })); // this tells express: anything that comes in as body, convert it to json. We increased the size limit to 4MB to allow for image uploads
+app.use(express.json({ limit: 1024 * 1024 * 4 })); //this tells express: anything that comes in as body, convert it to json. We increased file limit to allow for image uploads
 
 app.use(express.urlencoded({ extended: false }));
 

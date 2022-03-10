@@ -21,17 +21,15 @@ const getUser = (userId) => {
   return users.find((user) => user.userId === userId);
 };
 
-//establish the connection
 io.on("connection", (socket) => {
   //when a user connects
   console.log("a user connected.");
-
   //take user id and socket id from user
   socket.on("addUser", (userId) => {
     addUser(userId, socket.id);
     io.emit("getUsers", users);
   });
-  console.log("users array after a user is added:" + users);
+  console.log("users array after a user is added: " + users);
 
   //send and get message
   socket.on("sendMessage", ({ senderId, receiverId, messageBody }) => {
